@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Estate | Curated Luxury Properties in Milan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Didot&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #001F3F;
+            --gold: #D4AF37;
+            --light: #F8F8F8;
+        }
+        
+        body {
+            font-family: 'Didot', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--navy);
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 31, 63, 0.7), rgba(0, 31, 63, 0.9));
+            z-index: -1;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: grayscale(100%) contrast(120%);
+        }
+        
+        h1 {
+            font-size: 5rem;
+            margin: 0;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            margin-top: 1rem;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            padding: 0.5rem 0;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            z-index: 100;
+            background-color: rgba(0, 31, 63, 0.8);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .properties {
+            padding: 5rem;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+        }
+        
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .property-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .property-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+            transition: transform 0.5s ease;
+        }
+        
+        .property-card:hover .property-image {
+            transform: scale(1.05);
+        }
+        
+        .property-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .property-card:hover .property-overlay {
+            transform: translateY(0);
+        }
+        
+        .property-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .property-location {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            letter-spacing: 2px;
+        }
+        
+        .contact {
+            padding: 5rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            font-family: 'Didot', serif;
+        }
+        
+        textarea {
+            height: 150px;
+        }
+        
+        button {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 1rem 3rem;
+            font-family: 'Didot', serif;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: white;
+            color: var(--navy);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">AETHER ESTATE</div>
+        <div class="nav-links">
+            <a href="#properties">Properties</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>AETHER ESTATE</h1>
+        <div class="subtitle">CURATED LUXURY IN MILAN</div>
+    </section>
+    
+    <section id="properties" class="properties">
+        <h2 class="section-title">OUR SELECTED PROPERTIES</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <img src="property1.jpg" alt="Luxury Villa in Lombardy" class="property-image">
+                <div class="property-overlay">
+                    <h3 class="property-title">Villa Serenità</h3>
+                    <p class="property-location">Lombardy Countryside</p>
+                    <p>18th century restored villa with panoramic views of the Italian Alps</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="property2.jpg" alt="Historic Farmhouse in Tuscany" class="property-image">
+                <div class="property-overlay">
+                    <h3 class="property-title">Podere Antico</h3>
+                    <p class="property-location">Tuscan Hills</p>
+                    <p>16th century stone farmhouse with olive groves and vineyard</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="property3.jpg" alt="Modern Villa on Lake Como" class="property-image">
+                <div class="property-overlay">
+                    <h3 class="property-title">Villa Luminosa</h3>
+                    <p class="property-location">Lake Como</p>
+                    <p>Contemporary architecture with uninterrupted lake views</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="property4.jpg" alt="Rustic Retreat in Piedmont" class="property-image">
+                <div class="property-overlay">
+                    <h3 class="property-title">Cascina Rustica</h3>
+                    <p class="property-location">Piedmont Region</p>
+                    <p>Authentic countryside retreat with truffle forest access</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="property5.jpg" alt="Charming Borgo in Umbria" class="property-image">
+                <div class="property-overlay">
+                    <h3 class="property-title">Borgo Celeste</h3>
+                    <p class="property-location">Umbrian Countryside</p>
+                    <p>Small hamlet of restored stone houses with private chapel</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="property6.jpg" alt="Elegant Palazzo in Milan" class="property-image">
+                <div class="property-overlay">
+                    <h3 class="property-title">Palazzo Ducale</h3>
+                    <p class="property-location">Central Milan</p>
+                    <p>19th century palazzo with original frescoes and private garden</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="section-title">ABOUT AETHER ESTATE</h2>
+            <p>Founded in Milan, Aether Estate specializes in the most unique and visually stunning properties across Italy's most desirable regions. We curate only properties that tell a story through their architecture, history, and breathtaking views.</p>
+            <p>Our team of seasoned experts combines local knowledge with international perspective to guide discerning clients through every step of acquiring their dream Italian property.</p>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2 class="section-title">CONTACT US</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group full-width">
+                <input type="text" placeholder="Subject">
+            </div>
+            <div class="form-group full-width">
+                <textarea placeholder="Your Message" required></textarea>
+            </div>
+            <div class="form-group full-width">
+                <button type="submit">SEND MESSAGE</button>
+            </div>
+        </form>
+    </section>
+    
+    <footer>
+        <p>AETHER ESTATE</p>
+        <p>Via Montenapoleone 21, 20121 Milano MI, Italy</p>
+        <p>+39 02 1234 5678</p>
+        <p>© 2023 Aether Estate. All rights reserved.</p>
+    </footer>
+</body>
+</html>
